@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from register.serializer import RegisterSerializer
 from register.models import RegisterModel
+from django.db.models import Q
 
 # Create your views here.
 @csrf_exempt
@@ -27,7 +28,11 @@ def deleteUser(request):
 @csrf_exempt
 def searchUser(request):
     if request.method == "POST":
-        return HttpResponse(json.dumps({"Status" : "Searching User"}))
+        recieved_data = json.loads(request.body)
+        print(recieved_data)
+        getName = recieved_data["name"]
+        data = list(RegisterModel.objects.filter(Q(name__iscontains=getName)).values())
+        return HttpResponse(json.dumps(data))
     
 @csrf_exempt
 def viewUser(request):
