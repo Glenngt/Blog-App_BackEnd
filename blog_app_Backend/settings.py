@@ -79,9 +79,15 @@ WSGI_APPLICATION = 'blog_app_Backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'ENGINE': 'djongo',
+    "CLIENT": {
+    "name": "blogdb",
+    "host": "mongodb+srv://glenn_gt:Glennthomas30@cluster0.zorkbxe.mongodb.net/?retryWrites=true&w=majority",
+    "username": "glenn_gt",
+    "password": "Glennthomas30",
+    "authMechanism": "SCRAM-SHA-1",
+    },
+}
 }
 
 
